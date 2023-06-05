@@ -30,9 +30,7 @@ class CurrencyConverter extends React.Component {
 
   getRate = (base, quote) => {
     this.setState({ loading: true });
-    fetch(
-      `https://alt-exchange-rate.herokuapp.com/latest?base=${base}&symbols=${quote}`
-    )
+    fetch(`https://api.frankfurter.app/latest?from=${base}&to=${quote}`)
       .then(checkStatus)
       .then(json)
       .then((data) => {
@@ -59,7 +57,7 @@ class CurrencyConverter extends React.Component {
       .split("T")[0];
 
     fetch(
-      `https://alt-exchange-rate.herokuapp.com/history?start_at=${startDate}&end_at=${endDate}&base=${base}&symbols=${quote}`
+      `https://api.frankfurter.app/${startDate}..${endDate}?from=${base}&to=${quote}`
     )
       .then(checkStatus)
       .then(json)
