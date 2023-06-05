@@ -1,3 +1,4 @@
+// CurrencyConverter.js
 import React from "react";
 import Chart from "chart.js";
 import currencies from "./utils/currencies";
@@ -29,7 +30,9 @@ class CurrencyConverter extends React.Component {
 
   getRate = (base, quote) => {
     this.setState({ loading: true });
-    fetch(`https://api.frankfurter.app/latest?from=${base}&to=${quote}`)
+    fetch(
+      `https://alt-exchange-rate.herokuapp.com/latest?base=${base}&symbols=${quote}`
+    )
       .then(checkStatus)
       .then(json)
       .then((data) => {
@@ -56,7 +59,7 @@ class CurrencyConverter extends React.Component {
       .split("T")[0];
 
     fetch(
-      `https://api.frankfurter.app/${startDate}..${endDate}?from=${base}&to=${quote}`
+      `https://alt-exchange-rate.herokuapp.com/history?start_at=${startDate}&end_at=${endDate}&base=${base}&symbols=${quote}`
     )
       .then(checkStatus)
       .then(json)
