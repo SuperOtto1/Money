@@ -1,4 +1,5 @@
 import React from "react";
+import Chart from "chart.js";
 import currencies from "./utils/currencies";
 import { checkStatus, json } from "./utils/fetchUtils";
 
@@ -70,6 +71,32 @@ class CurrencyConverter extends React.Component {
         this.buildChart(chartLabels, chartData, chartLabel);
       })
       .catch((error) => console.error(error.message));
+  };
+
+  buildChart = (labels, data, label) => {
+    const chartRef = this.chartRef.current.getContext("2d");
+
+    if (typeof this.chart !== "undefined") {
+      this.chart.destroy();
+    }
+
+    this.chart = new Chart(this.chartRef.current.getContext("2d"), {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: label,
+            data,
+            fill: false,
+            tension: 0,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+      },
+    });
   };
 
   toBase(amount, rate) {

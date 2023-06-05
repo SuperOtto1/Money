@@ -1,4 +1,3 @@
-// fetchUtils.js
 export const checkStatus = (response) => {
   if (response.ok) {
     // .ok returns true if response status is 200-299
