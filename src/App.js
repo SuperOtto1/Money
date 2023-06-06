@@ -9,7 +9,7 @@ import "./App.css";
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/money">
       <Layout>
         <Switch>
           <Route path="/" exact component={Home} />
